@@ -10,15 +10,16 @@ interface constants{
     int EndLower = 122;
 }
 
-public class FreqLetComp implements constants {
+public  class FreqLetComp implements constants {
 
     private int freqLetArr [] = new int [26];
     private BufferedReader txtBuf;
 
     public FreqLetComp(BufferedReader buf){
         this.txtBuf = buf;
+        handler();
     }
-    void handler (){
+    private void handler (){
         try {
             int num ;
             while((num = txtBuf.read())!= -1) {
@@ -34,13 +35,15 @@ public class FreqLetComp implements constants {
         }
 
     }
+
     public int [] getFreqLett(){
         return  freqLetArr;
     }
+
     @Override
     public String toString()
     {
-        String res = null;
+        String res = "";
         for (int i=0; i<freqLetArr.length; ++i) {
             res += ((char)(i + StartCapital) + " " + freqLetArr[i] +"\n" );
         }
@@ -49,3 +52,5 @@ public class FreqLetComp implements constants {
 
 
 }
+
+

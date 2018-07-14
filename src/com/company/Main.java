@@ -9,8 +9,7 @@ public class Main {
         try(BufferedReader bufRd = new BufferedReader(new FileReader("Text.txt"))){
 
             FreqLetComp freqLetComp = new FreqLetComp(bufRd);
-            freqLetComp.handler();
-            System.out.println(freqLetComp);
+             System.out.println(freqLetComp);
         }
         catch (Exception ex){
             System.out.println(ex.getMessage());
