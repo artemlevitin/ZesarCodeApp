@@ -7,20 +7,35 @@ import java.io.IOException;
 public class Main {
 
     public static void main(String[] args)  {
-        FreqCheck();
+        String filePath = "Text.txt";
+        System.out.println(new Comparer( freqComp(filePath) ).getPrecission());
+
+         filePath = "Text_Code.txt";
+        System.out.println(new Comparer( freqComp(filePath) ).getPrecission());
+        //FreqCheck();
+
         //CodingText.codding("Text.txt",3);
     }
 
-    private static void FreqCheck() {
-        try(BufferedReader bufRd = new BufferedReader(new FileReader("Text.txt"))){
-
+    private static double[] freqComp(String filePath) {
+        try(BufferedReader bufRd = new BufferedReader(new FileReader(filePath))){
             FreqLetComp freqLetComp = new FreqLetComp(bufRd);
-             System.out.println(freqLetComp);
+                     return freqLetComp.getFreqLett();
         }
         catch (Exception ex){
             System.out.println(ex.getMessage());
+            return null;
         }
     }
-
+    private static double[] freqCompByte(String filePath) {
+        try(BufferedReader bufRd = new BufferedReader(new FileReader(filePath))){
+            FreqLetComp freqLetComp = new FreqLetComp(bufRd);
+            return freqLetComp.getFreqLett();
+        }
+        catch (Exception ex){
+            System.out.println(ex.getMessage());
+            return null;
+        }
+    }
 
 }
