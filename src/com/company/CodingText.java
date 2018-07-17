@@ -1,6 +1,8 @@
 package com.company;
 import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
@@ -15,7 +17,8 @@ public  class CodingText implements constants {
         try {
             byte[] buf = Files.readAllBytes(Paths.get(filePath));
             for (int i = 0; i < buf.length; ++i) {
-                buf[i] += key;
+               if(CheckLetter.result(buf[i])!=NotLetter)
+                   buf[i] += key;
             }
 
             int p = filePath.lastIndexOf(".");
@@ -28,22 +31,25 @@ public  class CodingText implements constants {
 
     }
 
-    static public void encodding(String filePath, int key) {
+    static public BufferedReader encodding(String filePath, int key) {
         try {
             byte[] buf = Files.readAllBytes(Paths.get(filePath));
 
             for (int i = 0; i < buf.length; ++i) {
-                if (CheckLetter.result( buf[i])!= NotLetter)
+                if (CheckLetter.result( buf[i]-key)!= NotLetter)
                 buf[i] -= key;
             }
-           // double one = new Comparer(new FreqLetComp(new BufferedReader(buf)))
 
+            return new BufferedReader( new InputStreamReader(new ByteArrayInputStream(buf)));
 
-            int p = filePath.lastIndexOf(".");
+           /* int p = filePath.lastIndexOf(".");
             String newFilePath = filePath.substring(0, p) + "_Code" + filePath.substring(p);
-            Files.write(Paths.get(newFilePath), buf);
+            Files.write(Paths.get(newFilePath), buf);*/
         } catch (Exception exc) {
             System.out.print(exc.toString());
+            return null;
         }
     }
+
+
 }
