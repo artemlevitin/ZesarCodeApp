@@ -1,8 +1,5 @@
 package com.company;
-import java.io.BufferedReader;
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
@@ -10,7 +7,7 @@ import java.nio.file.Paths;
 
 public  class CodingText implements constants {
     //  static public execute(String fileputh, int key){
-    private byte bufTxt[];
+    //private byte bufTxt[];
 
 
     static public void codding(String filePath, int key) {
@@ -52,4 +49,39 @@ public  class CodingText implements constants {
     }
 
 
+    static public ByteArrayInputStream  encodding(ByteArrayInputStream bais, int key) {
+        try {
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            int b;
+            while ((  b = bais.read())!= -1)
+            {
+                b -= key;
+                baos.write(b);
+          }
+           byte [] byteAr = baos.toByteArray();
+
+          return new ByteArrayInputStream(byteAr);
+
+        } catch (Exception exc) {
+            System.out.print(exc.toString());
+            return null;
+        }
+    }
+
+    static public byte[]  encodding(byte [] inpByte , int key) {
+        try {
+           byte [] outBytes = new byte[inpByte.length];
+           System.arraycopy(inpByte,0,outBytes,0,inpByte.length);
+
+            for(int i=0; i<outBytes.length; ++i) {
+                outBytes[i] -= key;
+             }
+
+            return outBytes;
+
+        } catch (Exception exc) {
+            System.out.print(exc.toString());
+            return null;
+        }
+    }
 }

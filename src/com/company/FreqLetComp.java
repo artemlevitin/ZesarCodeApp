@@ -9,7 +9,7 @@ public  class FreqLetComp implements constants {
 
     private double freqLet [] = new double[26];
     private BufferedReader txtBuf;
-    private byte byteBuf [];
+    private byte inputBytes [];
     private  int countLetter = 0;
 
     public FreqLetComp(BufferedReader buf){
@@ -18,11 +18,37 @@ public  class FreqLetComp implements constants {
     }
 
     public FreqLetComp(byte[] buf){
-        byteBuf = buf;
+        inputBytes = buf;
         handlerByte();
     }
 
     private void handlerByte() {
+        int num;
+
+        for (num =0; inputBytes.length > num; ++num) {
+                switch (CheckLetter.result(inputBytes[num])) {
+                    case NotLetter:
+                        break;
+
+                    case CapitalLetter:
+                        ++freqLet[inputBytes[num]- StartCapital];
+                        ++countLetter;
+                        break;
+
+                    case LowLetter:
+                        ++freqLet[inputBytes[num]- StartLower];
+                        ++countLetter;
+                        break;
+
+                    default:
+                        break;
+                }
+
+        }
+        //Recalculate to relative value
+        for (int i = 0; freqLet.length > i; ++i) {
+            freqLet[i] = 100 * freqLet[i] / countLetter;
+        }
     }
 
     private void handler (){
