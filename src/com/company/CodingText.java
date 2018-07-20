@@ -73,6 +73,7 @@ public  class CodingText implements Constants {
            System.arraycopy(inpByte,0,outBytes,0,inpByte.length);
 
             for(int i=0; i<outBytes.length; ++i) {
+                if(CheckLetter.result(outBytes[i])!=NOT_LETTER)
                 outBytes[i] -= key;
              }
 

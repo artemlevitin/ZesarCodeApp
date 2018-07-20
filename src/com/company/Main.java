@@ -13,7 +13,6 @@ public class Main {
         String filePath = "Text_Code.txt";
         byte[] buf = readFile(filePath);
         byte[] buf2;
-/*
         //CodingText.encodding(ReadFile(filePath),);
         //System.out.println( Comparer.getPrecission( new FreqLetters(buf).get() ) );
         double[] freqBuf1 = new FreqLetters(buf).get();
@@ -26,8 +25,8 @@ public class Main {
                 buf = buf2;
                 freqBuf1 = freqBuf2;
             }
-        }*/
-        buf = CodingText.encodding(buf,3);
+        }
+       // buf = CodingText.encodding(buf,3);
 
         writeFile(buf,filePath);
        // System.out.println( Comparer.getPrecission( new FreqLetters(buf2).get() ) );
