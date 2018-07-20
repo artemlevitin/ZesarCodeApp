@@ -1,26 +1,15 @@
 package com.company;
 
-interface constants{
-    int StartCapital = 65;
-    int EndCapitel = 90;
-    int StartLower = 97;
-    int EndLower = 122;
-
-    int CapitalLetter = 1;
-    int LowLetter = 2 ;
-    int NotLetter =0;
-}
-
-class CheckLetter implements constants{
+class CheckLetter implements Constants {
    public static int result(int letNum){
-       if (letNum >= StartCapital & letNum <= EndCapitel) {
-           return CapitalLetter;
+       if (letNum >= START_CAPITAL & letNum <= END_CAPITEL) {
+           return CAPITAL_LETTER;
        }
-       else if (letNum >= StartLower &  letNum <= EndLower) {
-       return LowLetter;
+       else if (letNum >= START_LOWER &  letNum <= END_LOWER) {
+       return LOW_LETTER;
        }
        else
-           return NotLetter;
+           return NOT_LETTER;
     }
 
  }

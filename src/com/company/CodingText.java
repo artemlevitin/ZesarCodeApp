@@ -5,7 +5,7 @@ import java.nio.file.Paths;
 
 
 
-public  class CodingText implements constants {
+public  class CodingText implements Constants {
     //  static public execute(String fileputh, int key){
     //private byte bufTxt[];
 
@@ -14,7 +14,7 @@ public  class CodingText implements constants {
         try {
             byte[] buf = Files.readAllBytes(Paths.get(filePath));
             for (int i = 0; i < buf.length; ++i) {
-               if(CheckLetter.result(buf[i])!=NotLetter)
+               if(CheckLetter.result(buf[i])!= NOT_LETTER)
                    buf[i] += key;
             }
 
@@ -33,7 +33,7 @@ public  class CodingText implements constants {
             byte[] buf = Files.readAllBytes(Paths.get(filePath));
 
             for (int i = 0; i < buf.length; ++i) {
-                if (CheckLetter.result( buf[i]-key)!= NotLetter)
+                if (CheckLetter.result( buf[i]-key)!= NOT_LETTER)
                 buf[i] -= key;
             }
 
@@ -47,7 +47,6 @@ public  class CodingText implements constants {
             return null;
         }
     }
-
 
     static public ByteArrayInputStream  encodding(ByteArrayInputStream bais, int key) {
         try {
