@@ -26,7 +26,7 @@ public  class CodingText implements Constants {
 
     }
 
-    static public BufferedReader encodding(String filePath, int key) {
+   /* static public BufferedReader encodding(String filePath, int key) {
         try {
             byte[] buf = Files.readAllBytes(Paths.get(filePath));
 
@@ -37,9 +37,9 @@ public  class CodingText implements Constants {
 
             return new BufferedReader(new InputStreamReader(new ByteArrayInputStream(buf)));
 
-           /* int p = filePath.lastIndexOf(".");
+           *//* int p = filePath.lastIndexOf(".");
             String newFilePath = filePath.substring(0, p) + "_Code" + filePath.substring(p);
-            Files.write(Paths.get(newFilePath), buf);*/
+            Files.write(Paths.get(newFilePath), buf);*//*
         } catch (Exception exc) {
             System.out.print(exc.toString());
             return null;
@@ -62,7 +62,7 @@ public  class CodingText implements Constants {
             System.out.print(exc.toString());
             return null;
         }
-    }
+    }*/
 
     static private byte[] encodding(byte[] inpByte, int key) {
         try {
@@ -70,8 +70,9 @@ public  class CodingText implements Constants {
             System.arraycopy(inpByte, 0, outBytes, 0, inpByte.length);
 
             for (int i = 0; i < outBytes.length; ++i) {
-                if (CheckLetter.result(outBytes[i] - key) != NOT_LETTER)
-                    outBytes[i] -= key;
+               int numChar = outBytes[i]& 0xFF;// convert to int for  unsigned if (CheckLetter.result(numChar - key) != NOT_LETTER)
+                if(CheckLetter.result(numChar -key)!=NOT_LETTER)
+                    outBytes[i] = (byte)(numChar - key);
             }
 
             return outBytes;
@@ -84,17 +85,17 @@ public  class CodingText implements Constants {
 
     static public void encoddingFile(String filePath) {
         try {
-            byte[] buf1 = Files.readAllBytes(Paths.get(filePath));
+            byte[] buf = Files.readAllBytes(Paths.get(filePath));
+            byte[] buf1 =buf;
             byte[] buf2;
 
-
-            double[] freqBuf1 = new FreqLetters(buf1).get();
+            double[] freqBuf1 = new FreqLetters(buf1,0).get();
             double[] freqBuf2;
 
-
             for (int key = 1; key < 12; ++key) {
-                buf2 = encodding(buf1, key);
-                freqBuf2 = new FreqLetters(buf2).get();
+
+                buf2 = encodding(buf, key);
+                freqBuf2 = new FreqLetters(buf2, key).get();
                 if (Comparer.getPrecission(freqBuf1) > Comparer.getPrecission(freqBuf2)) {
                     buf1 = buf2;
                     freqBuf1 = freqBuf2;

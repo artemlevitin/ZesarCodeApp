@@ -10,14 +10,23 @@ public  class FreqLetters implements Constants {
     private BufferedReader txtBuf;
     private byte inputBytes [];
     private  int countLetter = 0;
+    private int key =0;
 
-    public FreqLetters(BufferedReader buf){
+    public FreqLetters(BufferedReader buf, int key){
         this.txtBuf = buf;
+        this.key =key;
+        for(int i=0;i<freqLet.length;++i){
+            freqLet[i] = 0f;
+        }
         handler_Bufferreader();
     }
 
-    public FreqLetters(byte[] buf){
+    public FreqLetters(byte[] buf,int key){
         inputBytes = buf;
+        this.key =key;
+        /*for(int i=0;i<freqLet.length;++i){
+            freqLet[i] = 0f;
+        }*/
         handlerByte();
     }
 
@@ -25,17 +34,18 @@ public  class FreqLetters implements Constants {
         int num;
 
         for (num =0; inputBytes.length > num; ++num) {
+
                 switch (CheckLetter.result(inputBytes[num])) {
                     case NOT_LETTER:
                         break;
 
                     case CAPITAL_LETTER:
-                        ++freqLet[inputBytes[num]- START_CAPITAL];
+                        ++freqLet[inputBytes[num] - START_CAPITAL];
                         ++countLetter;
                         break;
 
                     case LOW_LETTER:
-                        ++freqLet[inputBytes[num]- START_LOWER];
+                        ++freqLet[inputBytes[num]  - START_LOWER];
                         ++countLetter;
                         break;
 
@@ -46,7 +56,10 @@ public  class FreqLetters implements Constants {
         }
         //Recalculate to relative value
         for (int i = 0; freqLet.length > i; ++i) {
-            freqLet[i] = 100 * freqLet[i] / countLetter;
+           if (freqLet[i]== 0)
+               continue;
+            else
+                freqLet[i] = 100 * freqLet[i] / countLetter;
         }
     }
 

@@ -8,7 +8,7 @@ import java.nio.file.Paths;
 public class Main {
 
     public static void main(String[] args) {
-        CodingText.codding("Text.txt",4);
+        CodingText.codding("Text.txt",11);
 
         CodingText.encoddingFile("Text_Code.txt");
 
@@ -53,9 +53,9 @@ public class Main {
         }
     }
 
-    private static double[] fileFreqLet(String filePath) {
+    private static double[] fileFreqLet(String filePath, int key) {
         try(BufferedReader bufRd = new BufferedReader(new FileReader(filePath))){
-            FreqLetters freqLetters = new FreqLetters(bufRd);
+            FreqLetters freqLetters = new FreqLetters(bufRd, key);
 
                      return freqLetters.get();
         }
